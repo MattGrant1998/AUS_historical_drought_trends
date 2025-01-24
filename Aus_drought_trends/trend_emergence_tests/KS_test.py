@@ -52,11 +52,11 @@ def find_ks_test_ds(dataarray, window, baseline):
 
     Args:
         dataarray (xr.DataArray): spatial and temporal data
-        window (int): window size for KS test
+        window (int): window size for KS test (in years)
         baseline (list of str): list of form [start_baseline_year, end_baseline_year]
 
     Returns:
-        ks_da (xr.DataArray): ks statistics for the dataarray
+        ks_ds (xr.DataArray): ks statistics for the dataarray
     """
     dataarray_window = (dataarray
                     .rolling(time=window, center=True, min_periods=window)
@@ -156,6 +156,7 @@ DROUGHT_TYPES = [
 def main():
     for drought_type in DROUGHT_TYPES:
         apply_ks_to_aud(drought_type, ['1911', '1961'])
+        apply_ks_to_tud(drought_type, ['1911', '1961'])
         
 
 if __name__ == "__main__":
